@@ -58,7 +58,7 @@ class Movie {
     overview = data['overview'];
     releaseDate = data['release'];
   }
-  Movie.getPoster() {
+  getPoster() {
     if (posterPath == null) {
       return 'https://goodyfeed.com/wp-content/uploads/2015/09/error404.jpg';
     } else {
