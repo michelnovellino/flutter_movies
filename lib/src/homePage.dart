@@ -15,7 +15,18 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _renderSwiper() {
-    moviesProvider.get('movie/now_playing');
-    return CardSwiper(movies: [1,2,3,4,5]);
+    return FutureBuilder(
+      future: moviesProvider.get('movie/now_playing'),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return CardSwiper(movies: snapshot.data);
+        } else {
+          return Container(
+            height: 350.0,
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
   }
 }

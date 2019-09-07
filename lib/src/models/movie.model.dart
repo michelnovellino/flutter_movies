@@ -2,12 +2,12 @@ class Movies {
   List<Movie> items = new List();
   Movies();
   Movies.fromJson(List<dynamic> list) {
-    if(list == null) return;
+    if (list == null) return;
     for (var item in list) {
       final movie = new Movie.fromJsonMap(item);
       items.add(movie);
     }
-  } 
+  }
 }
 
 class Movie {
@@ -57,5 +57,12 @@ class Movie {
     voteAverage = data['vote_average'] / 1;
     overview = data['overview'];
     releaseDate = data['release'];
+  }
+  Movie.getPoster() {
+    if (posterPath == null) {
+      return 'https://goodyfeed.com/wp-content/uploads/2015/09/error404.jpg';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
   }
 }
