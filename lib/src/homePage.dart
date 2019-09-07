@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/src/widgets/card_widget.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_movies/src/widgets/card.widget.dart';
+import 'package:flutter_movies/src/providers/movies.provider.dart';
 
 class HomePage extends StatelessWidget {
+  final moviesProvider = new MoviesProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _renderSwiper() {
+    moviesProvider.get('movie/now_playing');
     return CardSwiper(movies: [1,2,3,4,5]);
   }
 }
