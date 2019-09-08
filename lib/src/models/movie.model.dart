@@ -65,4 +65,11 @@ class Movie {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
   }
+    getPosterbackdrop() {
+    if (posterPath == null) {
+      return 'https://goodyfeed.com/wp-content/uploads/2015/09/error404.jpg';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
 }

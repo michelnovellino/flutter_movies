@@ -13,13 +13,13 @@ class CardSwiper extends StatelessWidget {
     return Container(
       child: Swiper(
         layout: SwiperLayout.STACK,
-        itemWidth: _screenSize.width * .70,
-        itemHeight: _screenSize.height * .50,
+        itemWidth: _screenSize.width * .50,
+        itemHeight: _screenSize.height * .35,
         itemBuilder: (BuildContext context, int index) {
           return ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: FadeInImage(
-                placeholder: AssetImage('assets/img/loading.gif'),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
                 fadeInDuration: Duration(seconds: 2),
                 image: NetworkImage(movies[index].getPoster()),
                 fit: BoxFit.cover
