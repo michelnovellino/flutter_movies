@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies/src/search/search.delegate.dart';
 import 'package:flutter_movies/src/widgets/card.widget.dart';
 import 'package:flutter_movies/src/providers/movies.provider.dart';
 import 'package:flutter_movies/src/widgets/multicarousel.widget.dart';
@@ -10,7 +11,15 @@ class HomePage extends StatelessWidget {
     moviesProvider.getPopular();
     return Scaffold(
         appBar: AppBar(
-          title: Text('homePage'),
+          title: Text('Peliculas'),
+         actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context,delegate: Search());
+              },
+            )
+         ] ,
         ),
         body: Container(
           child: Column(

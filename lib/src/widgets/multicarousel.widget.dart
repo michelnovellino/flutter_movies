@@ -30,19 +30,23 @@ class MultiCarousel extends StatelessWidget {
 
   Widget _renderMovies(BuildContext context, Movie movie) {
     final _screenSize = MediaQuery.of(context).size;
+    movie.uniqueId = '${movie.id}--popular';
     final movieObj = Container(
       margin: EdgeInsets.only(right: 25.0),
       child: Column(
         children: <Widget>[
-          ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: FadeInImage(
-                image: NetworkImage(movie.getPoster()),
-                placeholder: AssetImage('assets/img/no-image.jpg'),
-                fit: BoxFit.fill,
-                height: _screenSize.height * .30,
-                width: _screenSize.width * .40,
-              )),
+          Hero(
+            tag: movie.uniqueId,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: FadeInImage(
+                  image: NetworkImage(movie.getPoster()),
+                  placeholder: AssetImage('assets/img/no-image.jpg'),
+                  fit: BoxFit.fill,
+                  height: _screenSize.height * .30,
+                  width: _screenSize.width * .40,
+                )),
+          ),
           SizedBox(
             height: _screenSize.height * 0.01,
           ),
@@ -55,12 +59,10 @@ class MultiCarousel extends StatelessWidget {
       ),
     );
     return GestureDetector(
-      child: movieObj,
-      onTap: () {
-        print(' ${movie.title} -- ${movie.id} ');
-        Navigator.pushNamed(context, 'single',arguments: movie);
-      }
-    );
+        child: movieObj,
+        onTap: () {
+          Navigator.pushNamed(context, 'single', arguments: movie);
+        });
   }
 
 /*   List<Widget> _movies(context) {

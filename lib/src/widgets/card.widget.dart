@@ -8,25 +8,38 @@ class CardSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = MediaQuery.of(context).size;
-
     return Container(
-      child: Swiper(
-        layout: SwiperLayout.STACK,
-        itemWidth: _screenSize.width * .50,
-        itemHeight: _screenSize.height * .35,
-        itemBuilder: (BuildContext context, int index) {
-          return ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/img/no-image.jpg'),
-                fadeInDuration: Duration(seconds: 2),
-                image: NetworkImage(movies[index].getPoster()),
-                fit: BoxFit.cover
-              ));
-        },
-        itemCount: movies.length,
-      ),
+      child: _renderCard(context),
     );
+  }
+
+  Widget _renderCard(context) {
+    final _screenSize = MediaQuery.of(context).size;
+    final movieObj = Swiper(
+      layout: SwiperLayout.STACK,
+      itemWidth: _screenSize.width * .50,
+      itemHeight: _screenSize.height * .35,
+      itemBuilder: (BuildContext context, int index) {
+        movies[index].uniqueId = '${movies[index].id}--card';
+        return Hero(
+          tag: movies[index].uniqueId,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'single', arguments: movies[index]);
+            },
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: FadeInImage(
+                    placeholder: AssetImage('assets/img/no-image.jpg'),
+                    fadeInDuration: Duration(seconds: 2),
+                    image: NetworkImage(movies[index].getPoster()),
+                    fit: BoxFit.cover)),
+          ),
+        );
+      },
+      itemCount: movies.length,
+    );
+
+    return movieObj;
   }
 }
